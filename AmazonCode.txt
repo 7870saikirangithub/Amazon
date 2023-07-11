@@ -1,0 +1,49 @@
+package demo;
+
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class AmazonDemo {
+
+	public static void main(String[] args) throws InterruptedException {
+		ChromeDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.amazon.in/");
+		WebElement Mobiles = driver.findElement(By.linkText("Mobiles"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(Mobiles).build().perform();
+		
+		Thread.sleep(3000);
+	
+		 
+		driver.findElement(By.linkText("Mobiles")).click();
+	driver.findElement(By.linkText("Mobiles & Accessories")).click();
+	driver.findElement(By.linkText("Apple")).click();
+	//driver.findElement(By.linkText("Apple iPhone 14 (128 GB)-Blue")).click();
+	driver.findElement(By.xpath("//*[@id=\"search\"]/div[1]/div[1]/div/span[1]/div[1]/div[5]/div/div/div/div/div[1]/span/a/div")).click();
+	//Thread.sleep(3000);
+	//driver.findElement(By.xpath("//*[@id=\"a-autoid-16-announce\"]/div/div[1]/img")).click();
+	//driver.findElement(By.xpath("//*[@id=\"add-to-cart-button\"]")).click();
+	//5) Switch focus on new tab
+		ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		
+		//
+		driver.findElement(By.id("buy-now-button")).click();
+		try {
+			System.out.println("Item Found");
+		}catch (NoSuchElementException e) {
+			System.out.println("Item doesn't exist");
+			
+			
+		}
+		driver.quit();
+
+	
+
+}}
